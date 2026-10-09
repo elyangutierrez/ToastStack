@@ -7,6 +7,7 @@ let package = Package(
     name: "ToastStack",
     platforms: [
         .iOS(.v26),
+        .macOS(.v26)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -24,10 +25,6 @@ let package = Package(
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
-        ),
-        .executableTarget(
-            name: "ToastExample",
-            dependencies: ["ToastStack"],
         ),
         .testTarget(
             name: "ToastStackTests",

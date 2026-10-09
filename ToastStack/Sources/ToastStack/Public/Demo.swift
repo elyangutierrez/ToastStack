@@ -1,0 +1,32 @@
+//
+//  Tut.swift
+//  ToastStack
+//
+//  Created by Elyan Gutierrez on 10/9/26.
+//
+
+import SwiftUI
+
+internal struct Demo: View {
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: "globe")
+                .font(.title2.bold())
+            
+            Text("Hello, world!")
+            
+            Button(action: {
+                ToastStack.random("Something here.", .top)
+            }) {
+                Text("Show Toast")
+            }
+            .buttonStyle(.glassProminent)
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    Demo()
+        .toastHost()
+}

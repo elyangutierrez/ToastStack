@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "ToastStack",
+    platforms: [
+        .iOS(.v26),
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -17,9 +20,14 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "ToastStack",
+            dependencies: [],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
+        ),
+        .executableTarget(
+            name: "ToastExample",
+            dependencies: ["ToastStack"],
         ),
         .testTarget(
             name: "ToastStackTests",

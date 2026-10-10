@@ -21,14 +21,31 @@ internal extension Color {
 }
 
 public extension View {
-    func toastHost() -> some View {
-        modifier(ToastHost())
+    func toastHost(
+        toastPlacement: Alignment = .top,
+        animationStyle: Animation = .spring
+    ) -> some View {
+        modifier(
+            ToastHost(
+                toastPlacement: toastPlacement,
+                animationStyle: animationStyle
+            )
+        )
     }
 }
 
 internal extension View {
-    func stacked(at position: Int, in total: Int) -> some View {
-        let offset = Double(total - position)
+    func stacked(
+        at position: Int,
+        in total: Int,
+        with toastPlacement: Alignment
+    ) -> some View {
+        var offset = Double(total - position)
+        
+        if toastPlacement == .bottom || toastPlacement == .bottomLeading || toastPlacement == .bottomTrailing {
+            offset = -offset
+        }
+        
         return self.offset(y: offset * 10)
     }
 }

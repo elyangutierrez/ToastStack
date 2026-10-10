@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import ToastStack
 
 @main
 struct ToastExampleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .toastHost()
         }
     }
 }

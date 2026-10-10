@@ -10,11 +10,16 @@ import ToastStack
 
 struct ContentView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
+            Image(systemName: "globe")
+                .font(.title2.bold())
+            
+            Text("Hello, world!")
+            
             Button(action: {
-                ToastStack.success("First message!")
+                ToastStack.success("Something here.", .top)
             }) {
-                Text("Hello world!")
+                Text("Show Toast")
             }
             .buttonStyle(.glassProminent)
         }
@@ -24,4 +29,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .frame(width: 300, height: 300)
+        .toastHost()
 }

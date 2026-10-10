@@ -15,14 +15,11 @@ internal struct AdaptiveToastView: View {
     var dismissAction: () -> Void
     
     var body: some View {
+        #if os(macOS)
         VStack {
-            if horizontalSizeClass == .compact {
-                iPhoneToastView(toast: toast, dismissAction: dismissAction)
-            } else {
-                iPadToastView(toast: toast, dismissAction: dismissAction)
-            }
+            macOSToastView(toast: toast, dismissAction: dismissAction)
         }
-        .frame(maxWidth: 475)
+        .frame(maxWidth: 275)
         .transition(
             .move(
                 edge: AlignmentEdge.convert(
@@ -32,6 +29,25 @@ internal struct AdaptiveToastView: View {
             .combined(with: .opacity)
             .combined(with: .blurReplace)
         )
+        #elseif os(iOS)
+            VStack {
+                if horizontalSizeClass == .compact {
+                    iPhoneToastView(toast: toast, dismissAction: dismissAction)
+                } else {
+                    iPadToastView(toast: toast, dismissAction: dismissAction)
+                }
+            }
+            .frame(maxWidth: 475)
+            .transition(
+                .move(
+                    edge: AlignmentEdge.convert(
+                        alignment: toast.alignment
+                    )
+                )
+                .combined(with: .opacity)
+                .combined(with: .blurReplace)
+            )
+        #endif
     }
 }
 

@@ -16,7 +16,7 @@ internal struct Demo: View {
             Text("Hello, world!")
             
             Button(action: {
-                ToastStack.random("Something here.", .top)
+                ToastStack.random("Something here...", .top)
             }) {
                 Text("Show Toast")
             }

@@ -20,7 +20,7 @@ internal struct iPhoneToastView: View {
                 .foregroundStyle(toast.iconColor)
                 .symbolRenderingMode(.monochrome)
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading) {
                 Text(toast.title)
                     .font(ToastConstants.IPHONE_TOAST_TITLE_FONT)
                     .fontWeight(.bold)
@@ -41,7 +41,8 @@ internal struct iPhoneToastView: View {
             }
             .buttonStyle(.plain)
         }
-        .padding()
+        .padding(.horizontal, 15)
+        .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(toast.toastBackgroundColor(for: colorScheme))

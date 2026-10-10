@@ -20,7 +20,7 @@ internal struct ToastHost: ViewModifier {
                         ZStack {
                             ForEach(toastManager.toasts) { toast in
                                 let position = toastManager.toasts.firstIndex(where: { $0.id == toast.id }) ?? 0
-                                ToastView(toast: toast) {
+                                AdaptiveToastView(toast: toast) {
                                     toastManager.cancelTask(for: toast)
                                     toastManager.dismiss(for: toast)
                                 }

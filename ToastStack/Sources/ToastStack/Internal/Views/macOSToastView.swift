@@ -1,32 +1,32 @@
 //
-//  ToastView.swift
+//  macOSToastView.swift
 //  ToastStack
 //
-//  Created by Elyan Gutierrez on 10/8/26.
+//  Created by Elyan Gutierrez on 10/10/26.
 //
 
 import SwiftUI
 
-internal struct ToastView: View {
-    
+internal struct macOSToastView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var toast: Toast
     var dismissAction: () -> Void
     
     var body: some View {
-        HStack(spacing: 15) {
+        HStack(spacing: 13) {
             Image(systemName: toast.icon)
-                .font(.largeTitle.bold())
+                .font(ToastConstants.MAC_TOAST_ICON_FONT.bold())
                 .foregroundStyle(toast.iconColor)
                 .symbolRenderingMode(.monochrome)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(toast.title)
-                    .font(.title3)
+                    .font(ToastConstants.MAC_TOAST_TITLE_FONT)
                     .fontWeight(.bold)
                     .foregroundStyle(toast.toastForegroundColor(for: colorScheme))
                 Text(toast.message)
+                    .font(ToastConstants.MAC_TOAST_MESSAGE_FONT)
                     .fontWeight(.medium)
                     .foregroundStyle(toast.toastForegroundColor(for: colorScheme).opacity(0.7))
             }
@@ -37,12 +37,13 @@ internal struct ToastView: View {
                 dismissAction()
             }) {
                 Image(systemName: "xmark")
-                    .font(.title2.bold())
+                    .font(ToastConstants.MAC_CLOSE_BUTTON_FONT.bold())
                     .foregroundStyle(toast.toastForegroundColor(for: colorScheme).opacity(0.7))
             }
             .buttonStyle(.plain)
         }
-        .padding()
+        .padding(.horizontal, 15)
+        .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(toast.toastBackgroundColor(for: colorScheme))
@@ -50,24 +51,18 @@ internal struct ToastView: View {
                     color:
                         colorScheme == .light ?
                     toast.toastForegroundColor(for: colorScheme).opacity(0.4) : .clear,
-                    radius: 3,
-                    y: 5
+                    radius: ToastConstants.MAC_SHADOW_SPECS.0,
+                    y: ToastConstants.MAC_SHADOW_SPECS.1
                 )
-        )
-        .transition(
-            .move(
-                edge: AlignmentEdge.convert(
-                    alignment: toast.alignment
-                )
-            )
-            .combined(with: .opacity)
-            .combined(with: .blurReplace)
         )
     }
 }
 
 #Preview {
-    ToastView(toast: Toast(message: "First message!", style: .info, alignment: .top), dismissAction: {})
-        .frame(width: 300, height: 300)
+    let toast = Toast(message: "first message", style: .success, alignment: .top)
+    
+    macOSToastView(toast: toast, dismissAction: {})
+        .frame(maxWidth: 250)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: toast.alignment)
         .padding()
 }

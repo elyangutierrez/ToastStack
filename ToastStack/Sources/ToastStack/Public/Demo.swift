@@ -1,5 +1,5 @@
 //
-//  Tut.swift
+//  Demo.swift
 //  ToastStack
 //
 //  Created by Elyan Gutierrez on 10/9/26.
@@ -16,7 +16,7 @@ internal struct Demo: View {
             Text("Hello, world!")
             
             Button(action: {
-                ToastStack.random("Something here.", .top)
+                ToastStack.random("Something here...", .top)
             }) {
                 Text("Show Toast")
             }

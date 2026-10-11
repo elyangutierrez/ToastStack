@@ -24,11 +24,25 @@ internal struct ToastHost: ViewModifier {
                             ForEach(toastManager.toasts) { toast in
                                 let position = toastManager.toasts.firstIndex(where: { $0.id == toast.id }) ?? 0
                                 
-                                AdaptiveToastView(toast: toast) {
-                                    toastManager.cancelTask(for: toast)
-                                    toastManager.dismiss(for: toast)
+                                if let customView = toast.content {
+                                    customView
+                                        .transition(
+                                            .move(
+                                                edge: AlignmentEdge.convert(
+                                                    alignment: toast.alignment
+                                                )
+                                            )
+                                            .combined(with: .opacity)
+                                            .combined(with: .blurReplace)
+                                        )
+                                        .stacked(at: position, in: toastManager.toasts.count, with: toastPlacement)
+                                } else {
+                                    AdaptiveToastView(toast: toast) {
+                                        toastManager.cancelTask(for: toast)
+                                        toastManager.dismiss(for: toast)
+                                    }
+                                    .stacked(at: position, in: toastManager.toasts.count, with: toastPlacement)
                                 }
-                                .stacked(at: position, in: toastManager.toasts.count, with: toastPlacement)
                             }
                         }
                     }

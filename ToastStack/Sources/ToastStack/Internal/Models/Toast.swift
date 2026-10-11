@@ -13,6 +13,29 @@ internal struct Toast: Identifiable, Equatable, Hashable {
     var message: String
     var style: ToastStyle
     var alignment: Alignment
+    var content: AnyView?
+    
+    init(
+        message: String,
+        style: ToastStyle,
+        alignment: Alignment,
+    ) {
+        self.message = message
+        self.style = style
+        self.alignment = alignment
+    }
+    
+    init<Content: View>(
+        message: String = "",
+        style: ToastStyle = .success,
+        alignment: Alignment,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.message = message
+        self.style = style
+        self.alignment = alignment
+        self.content = AnyView(content())
+    }
     
     var title: String {
         style.rawValue
@@ -68,5 +91,13 @@ internal struct Toast: Identifiable, Equatable, Hashable {
         case .warning:
             return colorScheme == .light ? ToastConstants.WARNING_FOREGROUND.light : ToastConstants.WARNING_FOREGROUND.dark
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: borrowing Toast, rhs: borrowing Toast) -> Bool {
+        lhs.id == rhs.id
     }
 }

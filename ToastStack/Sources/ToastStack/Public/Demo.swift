@@ -7,13 +7,10 @@
 
 import SwiftUI
 
-internal struct Demo: View {
+internal struct DemoView: View {
     
     var toastAppearanceAlignment: Alignment
-    
-    init(toastAppearanceAlignment: Alignment = .top) {
-        self.toastAppearanceAlignment = toastAppearanceAlignment
-    }
+    var randomButton: Bool
     
     var body: some View {
         VStack(spacing: 8) {
@@ -23,7 +20,19 @@ internal struct Demo: View {
             Text("Hello, world!")
             
             Button(action: {
-                ToastStack.random("Something here...", toastAppearanceAlignment)
+                if randomButton {
+                    ToastStack.random(
+                        "Something here...",
+                        toastAppearanceAlignment,
+                        AnyView(CustomDemoView())
+                    )
+                } else {
+                    ToastStack.custom(
+                        content:
+                            AnyView(CustomDemoView()
+                        )
+                    )
+                }
             }) {
                 Text("Show Toast")
             }
@@ -33,17 +42,38 @@ internal struct Demo: View {
     }
 }
 
+internal struct Demo: View {
+    
+    var toastAppearanceAlignment: Alignment
+    var content: AnyView
+    
+    init<Content: View>(toastAppearanceAlignment: Alignment = .top, @ViewBuilder content: () -> Content) {
+        self.toastAppearanceAlignment = toastAppearanceAlignment
+        self.content = AnyView(content())
+    }
+    
+    var body: some View {
+        content
+    }
+}
+
 #Preview("Custom Placement") {
-    Demo(toastAppearanceAlignment: .bottom)
-        .toastHost(toastPlacement: .bottom)
+    Demo(toastAppearanceAlignment: .bottom) {
+        DemoView(toastAppearanceAlignment: .bottom, randomButton: false)
+    }
+    .toastHost(toastPlacement: .bottom)
 }
 
 #Preview("Default") {
-    Demo()
-        .toastHost()
+    Demo() {
+        DemoView(toastAppearanceAlignment: .top, randomButton: true)
+    }
+    .toastHost()
 }
 
 #Preview("Custom Animation") {
-    Demo()
-        .toastHost(animationStyle: .interactiveSpring)
+    Demo() {
+        DemoView(toastAppearanceAlignment: .top, randomButton: true)
+    }
+    .toastHost(animationStyle: .interactiveSpring)
 }

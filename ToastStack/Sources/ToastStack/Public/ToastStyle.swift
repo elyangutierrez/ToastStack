@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal enum ToastStyle: String {
+public enum ToastStyle: String {
     case success = "Success"
     case error = "Error"
     case info = "Info"

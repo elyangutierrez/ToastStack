@@ -17,7 +17,10 @@ struct ContentView: View {
             Text("Hello, world!")
             
             Button(action: {
-                ToastStack.success("Something here.", .top)
+//                ToastStack.success(message: "Changes made.")
+//                ToastStack.info(message: "A new version is avaliable.")
+//                ToastStack.warning(message: "Check your connection.")
+                ToastStack.error(message: "Could not save changes.")
             }) {
                 Text("Show Toast")
             }

@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 public enum ToastStack {
     public static func success(
-        _ message: String,
+        message: String,
         _ position: Alignment = .top
     ){
         ToastManager.shared.show(
@@ -19,7 +19,7 @@ public enum ToastStack {
     }
     
     public static func error(
-        _ message: String,
+        message: String,
         _ position: Alignment = .top
     ){
         ToastManager.shared.show(
@@ -28,7 +28,7 @@ public enum ToastStack {
     }
     
     public static func warning(
-        _ message: String,
+        message: String,
         _ position: Alignment = .top
     ){
         ToastManager.shared.show(
@@ -37,7 +37,7 @@ public enum ToastStack {
     }
     
     public static func info(
-        _ message: String,
+        message: String,
         _ position: Alignment = .top
     ){
         ToastManager.shared.show(
@@ -45,23 +45,37 @@ public enum ToastStack {
         )
     }
     
+    public static func custom(
+        _ position: Alignment = .top,
+        content: AnyView
+    ){
+        ToastManager.shared.show(
+            Toast(alignment: position, content: {
+                content
+            })
+        )
+    }
+    
     internal static func random(
         _ message: String,
-        _ position: Alignment = .top
+        _ position: Alignment = .top,
+        _ customView: AnyView
     ){
-        let randomNumber = Int.random(in: 1...4)
+        let randomNumber = Int.random(in: 1...5)
         
         switch randomNumber {
         case 1:
-            success(message, position)
+            success(message: message, position)
         case 2:
-            error(message, position)
+            error(message: message, position)
         case 3:
-            warning(message, position)
+            warning(message: message, position)
         case 4:
-            info(message, position)
+            info(message: message, position)
+        case 5:
+            custom(position, content: customView)
         default:
-            success(message, position)
+            success(message: message, position)
         }
     }
 }

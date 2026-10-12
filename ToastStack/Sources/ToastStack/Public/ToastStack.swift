@@ -11,48 +11,58 @@ import SwiftUI
 public enum ToastStack {
     public static func success(
         message: String,
-        _ position: Alignment = .top
+        _ position: Alignment = .top,
+        dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .success, alignment: position)
+            Toast(message: message, style: .success, alignment: position),
+            dismissalTime
         )
     }
     
     public static func error(
         message: String,
-        _ position: Alignment = .top
+        _ position: Alignment = .top,
+        dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .error, alignment: position)
+            Toast(message: message, style: .success, alignment: position),
+            dismissalTime
         )
     }
     
     public static func warning(
         message: String,
-        _ position: Alignment = .top
+        _ position: Alignment = .top,
+        dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .warning, alignment: position)
+            Toast(message: message, style: .success, alignment: position),
+            dismissalTime
         )
     }
     
     public static func info(
         message: String,
-        _ position: Alignment = .top
+        _ position: Alignment = .top,
+        dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .info, alignment: position)
+            Toast(message: message, style: .success, alignment: position),
+            dismissalTime
         )
     }
     
     public static func custom(
         _ position: Alignment = .top,
-        content: AnyView
+        content: AnyView,
+        dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
             Toast(alignment: position, content: {
                 content
-            })
+            }),
+            dismissalTime
         )
     }
     

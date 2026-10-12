@@ -26,7 +26,7 @@ public enum ToastStack {
         dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .success, alignment: position),
+            Toast(message: message, style: .error, alignment: position),
             dismissalTime
         )
     }
@@ -37,7 +37,7 @@ public enum ToastStack {
         dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .success, alignment: position),
+            Toast(message: message, style: .warning, alignment: position),
             dismissalTime
         )
     }
@@ -48,7 +48,7 @@ public enum ToastStack {
         dismissalTime: Int = 5
     ){
         ToastManager.shared.show(
-            Toast(message: message, style: .success, alignment: position),
+            Toast(message: message, style: .info, alignment: position),
             dismissalTime
         )
     }

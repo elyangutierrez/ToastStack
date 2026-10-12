@@ -27,15 +27,24 @@ internal final class ToastManager {
         tasks[toast]?.cancel()
         
         let newTask = Task {
-            await MainActor.run {
-                toasts.append(toast)
-            }
-            
-            try? await Task.sleep(for: .seconds(dismissalTime))
-            
-            await MainActor.run {
-                dismiss(for: toast)
-                tasks[toast] = nil
+            do {
+                await MainActor.run {
+                    toasts.append(toast)
+                }
+                
+                try await Task.sleep(
+                    for: .seconds(dismissalTime)
+                )
+                try Task.checkCancellation()
+                
+                await MainActor.run {
+                    dismiss(for: toast)
+                    tasks[toast] = nil
+                }
+            } catch is CancellationError {
+                return
+            } catch {
+                return
             }
         }
         

@@ -26,7 +26,7 @@ ToastStack is a SwiftUI package for presenting lightweight, stackable toast mess
 - SwiftUI view modifier for hosting toasts
 - Built-in success, error, warning, and info styles
 - Custom SwiftUI toast content
-- Automatic dismissal after five seconds; built-in toasts can also be dismissed with the close button
+- Configurable automatic dismissal time (five seconds by default); built-in toasts can also be dismissed with the close button
 - Layouts that adapt to iPhone, iPad, and macOS
 - Colors that adapt to light and dark appearance
 - Configurable toast placement and animation
@@ -98,6 +98,12 @@ ToastStack.warning(message: "Check your connection.")
 ToastStack.info(message: "A new version is available.")
 ```
 
+Each toast method accepts `dismissalTime` in seconds. It defaults to `5`, so existing calls keep the five-second dismissal time. Pass a different value to customize it:
+
+```swift
+ToastStack.success(message: "Changes saved.", dismissalTime: 3)
+```
+
 ## Placement
 
 The optional alignment on each toast method controls the toast's transition edge; use the same alignment for both for a matching entrance direction.
@@ -129,10 +135,10 @@ struct UploadToast: View {
 }
 
 // In a button action:
-ToastStack.custom(.bottom, content: AnyView(UploadToast()))
+ToastStack.custom(.bottom, content: AnyView(UploadToast()), dismissalTime: 8)
 ```
 
-Custom content follows the same five-second automatic dismissal timer. Unlike the built-in toast styles, it does not include a close button.
+Custom content uses the same configurable `dismissalTime` parameter, with a five-second default. Unlike the built-in toast styles, it does not include a close button.
 
 ## Example app
 

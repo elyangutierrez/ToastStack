@@ -22,22 +22,20 @@ internal final class ToastManager {
     
     private init() { }
     
-    func show(_ toast: Toast) {
+    func show(_ toast: Toast, _ dismissalTime: Int = 5) {
         
         tasks[toast]?.cancel()
         
         let newTask = Task {
             await MainActor.run {
-                print("added toast for: \(toast.message)")
                 toasts.append(toast)
             }
             
-            try? await Task.sleep(for: .seconds(5))
+            try? await Task.sleep(for: .seconds(dismissalTime))
             
             await MainActor.run {
                 dismiss(for: toast)
                 tasks[toast] = nil
-                print("removed toast for: \(toast.message)")
             }
         }
         

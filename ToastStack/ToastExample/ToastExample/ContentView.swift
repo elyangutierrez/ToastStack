@@ -20,7 +20,7 @@ struct ContentView: View {
 //                ToastStack.success(message: "Changes made.")
 //                ToastStack.info(message: "A new version is avaliable.")
 //                ToastStack.warning(message: "Check your connection.")
-                ToastStack.error(message: "Could not save changes.")
+                ToastStack.error(message: "Could not save changes.", dismissalTime: 1)
             }) {
                 Text("Show Toast")
             }

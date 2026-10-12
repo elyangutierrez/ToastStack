@@ -31,6 +31,10 @@ ToastStack is a SwiftUI package for presenting lightweight, stackable toast mess
 - Colors that adapt to light and dark appearance
 - Configurable toast placement and animation
 
+## API documentation
+
+The [DocC catalog](ToastStack/Sources/ToastStack/ToastStack.docc/Documentation.md) includes setup, placement, built-in style, and custom content guides, along with API reference comments.
+
 ## Requirements
 
 - Swift 6.4 or later
@@ -106,7 +110,7 @@ ToastStack.success(message: "Changes saved.", dismissalTime: 3)
 
 ## Placement
 
-The optional alignment on each toast method controls the toast's transition edge; use the same alignment for both for a matching entrance direction.
+The toast method's optional alignment controls its transition edge. `.top`, `.bottom`, `.leading`, and `.trailing` select the matching edge; other alignments use the top edge. `toastPlacement` controls where the stack appears. Use the same edge alignment for both when you want the toast to enter from where the stack is displayed.
 
 ```swift
 struct UploadView: View {

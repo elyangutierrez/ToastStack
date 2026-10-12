@@ -39,7 +39,7 @@ internal struct ToastHost: ViewModifier {
                                 } else {
                                     AdaptiveToastView(toast: toast) {
                                         toastManager.cancelTask(for: toast)
-                                        toastManager.dismiss(for: toast)
+                                        toastManager.dismiss(for: toast.id)
                                     }
                                     .stacked(at: position, in: toastManager.toasts.count, with: toastPlacement)
                                 }

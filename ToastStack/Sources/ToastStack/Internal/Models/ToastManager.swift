@@ -18,13 +18,13 @@ internal final class ToastManager {
     var firstToastAlignment: Alignment?
     
     private(set) var toasts: [Toast] = []
-    private(set) var tasks: [Toast: Task<Void, Never>] = [:]
+    private(set) var tasks: [UUID: Task<Void, Never>] = [:]
     
     private init() { }
     
     func show(_ toast: Toast, _ dismissalTime: Int = 5) {
         
-        tasks[toast]?.cancel()
+        tasks[toast.id]?.cancel()
         
         let newTask = Task {
             do {
@@ -38,8 +38,8 @@ internal final class ToastManager {
                 try Task.checkCancellation()
                 
                 await MainActor.run {
-                    dismiss(for: toast)
-                    tasks[toast] = nil
+                    dismiss(for: toast.id)
+                    tasks[toast.id] = nil
                 }
             } catch is CancellationError {
                 return
@@ -48,15 +48,15 @@ internal final class ToastManager {
             }
         }
         
-        tasks[toast] = newTask
+        tasks[toast.id] = newTask
     }
     
     func cancelTask(for toast: Toast) {
-        tasks[toast]?.cancel()
-        tasks[toast] = nil
+        tasks[toast.id]?.cancel()
+        tasks[toast.id] = nil
     }
     
-    func dismiss(for toast: Toast) {
-        toasts.removeAll(where: { $0.id == toast.id })
+    func dismiss(for id: UUID) {
+        toasts.removeAll(where: { $0.id == id })
     }
 }

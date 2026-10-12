@@ -70,7 +70,3 @@ internal extension View {
         return self.offset(y: offset * 10)
     }
 }
-
-extension Alignment: @retroactive Hashable {
-    public func hash(into hasher: inout Hasher) { }
-}

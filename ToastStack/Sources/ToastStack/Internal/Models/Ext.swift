@@ -21,6 +21,27 @@ internal extension Color {
 }
 
 public extension View {
+    /// Adds a host that displays ToastStack messages above this view.
+    ///
+    /// Attach the host to the view hierarchy where toasts should appear, then present toasts with
+    /// ``ToastStack``. The host overlays messages without replacing the view's content. Its
+    /// placement controls where the toast stack is drawn, while the animation controls changes to
+    /// that stack.
+    ///
+    /// For a matching entrance and display edge, use the same edge alignment for the toast's
+    /// position and `toastPlacement`. Edge alignments are `.top`, `.bottom`, `.leading`, and
+    /// `.trailing`; other toast positions use the top entrance edge.
+    ///
+    /// ```swift
+    /// ContentView()
+    ///     .toastHost(toastPlacement: .topTrailing, animationStyle: .snappy)
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - toastPlacement: The alignment of the toast stack within this view. Defaults to `.top`.
+    ///   - animationStyle: The animation used when the displayed toast stack changes. Defaults to
+    ///     `.spring`.
+    /// - Returns: A view that overlays ToastStack messages on this view.
     func toastHost(
         toastPlacement: Alignment = .top,
         animationStyle: Animation = .spring

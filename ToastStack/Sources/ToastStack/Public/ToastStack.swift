@@ -117,6 +117,23 @@ public enum ToastStack {
         )
     }
     
+    /// TODO: 
+    public static func actionable(
+        _ message: String,
+        _ alignment: Alignment,
+        action: ToastAction,
+        dismissalTimeDeadline: Int = 60
+    ) {
+        ToastManager.shared.show(
+            Toast(
+                message: message,
+                alignment: alignment,
+                action: action
+            ),
+            dismissalTimeDeadline
+        )
+    }
+    
     internal static func random(
         _ message: String,
         _ position: Alignment = .top,

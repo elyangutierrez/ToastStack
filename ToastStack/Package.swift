@@ -24,6 +24,7 @@ let package = Package(
             dependencies: [],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
+                .defaultIsolation(MainActor.self)
             ],
         ),
         .testTarget(

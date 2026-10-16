@@ -25,15 +25,16 @@ ToastStack is a SwiftUI package for presenting lightweight, stackable toast mess
 
 - SwiftUI view modifier for hosting toasts
 - Built-in success, error, warning, and info styles
+- Actionable toasts with a configurable button and handler
 - Custom SwiftUI toast content
-- Configurable automatic dismissal time (five seconds by default); built-in toasts can also be dismissed with the close button
+- Configurable automatic dismissal time (five seconds by default for standard toasts and 60 seconds for actionable toasts); built-in toasts can also be dismissed with the close button
 - Layouts that adapt to iPhone, iPad, and macOS
 - Colors that adapt to light and dark appearance
 - Configurable toast placement and animation
 
 ## API documentation
 
-The [DocC catalog](ToastStack/Sources/ToastStack/ToastStack.docc/Documentation.md) includes setup, placement, built-in style, and custom content guides, along with API reference comments.
+The [DocC catalog](ToastStack/Sources/ToastStack/ToastStack.docc/Documentation.md) includes setup, placement, built-in style, actionable toast, and custom content guides, along with API reference comments.
 
 ## Requirements
 
@@ -143,6 +144,29 @@ ToastStack.custom(.bottom, content: AnyView(UploadToast()), dismissalTime: 8)
 ```
 
 Custom content uses the same configurable `dismissalTime` parameter, with a five-second default. Unlike the built-in toast styles, it does not include a close button.
+
+## Actionable toasts
+
+Use `ToastStack.actionable` with a `ToastAction` to attach a button and handler to a toast. For example, an undo action can restore a draft after it is deleted:
+
+```swift
+ToastStack.actionable(
+    "The draft was deleted.",
+    .top,
+    action: ToastAction(
+        toastIcon: "trash",
+        toastTitle: "Draft deleted",
+        buttonTitle: "Undo",
+        dismissOnTrigger: true,
+        handler: {
+            restoreDraft()
+        }
+    ),
+    dismissalTimeDeadline: 15
+)
+```
+
+`toastIcon` and `buttonImage` accept optional SF Symbol names. The button shows `buttonImage` when set and displays `buttonTitle` otherwise. Tapping the button runs `handler`; when `dismissOnTrigger` is `true`, the toast closes after briefly showing a checkmark. Set it to `false` to keep the toast visible until its automatic dismissal deadline. Actionable toasts default to 60 seconds. See the [Actionable Toasts DocC guide](ToastStack/Sources/ToastStack/ToastStack.docc/ActionableToasts.md) for a complete SwiftUI example.
 
 ## Example app
 

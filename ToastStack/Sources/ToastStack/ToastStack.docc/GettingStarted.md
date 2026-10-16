@@ -32,5 +32,6 @@ ToastStack supports iOS 26 and macOS 26 or later. The host defaults to top place
 ### Next steps
 
 - <doc:BuiltInStyles>
+- <doc:ActionableToasts>
 - <doc:PlacementAndAnimation>
 - <doc:CustomContent>

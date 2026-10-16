@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+/// The content and behavior of the button shown in an actionable toast.
+///
+/// Pass a `ToastAction` to ``ToastStack/actionable(_:_:action:dismissalTimeDeadline:)``.
+/// The optional icon names use SF Symbols. The button shows `buttonImage` when set and
+/// displays `buttonTitle` otherwise.
 public struct ToastAction {
     var toastIcon: String?
     var toastTitle: String
@@ -16,6 +21,15 @@ public struct ToastAction {
     var dismissOnTrigger: Bool
     var handler: () -> Void
     
+    /// Creates an action for an actionable toast.
+    ///
+    /// - Parameters:
+    ///   - toastIcon: An optional SF Symbol displayed beside the toast title.
+    ///   - toastTitle: The title displayed above the toast message.
+    ///   - buttonTitle: The text displayed in the action button when `buttonImage` is `nil`.
+    ///   - buttonImage: An optional SF Symbol displayed in the action button when set.
+    ///   - dismissOnTrigger: Whether tapping the button dismisses the toast after its feedback animation.
+    ///   - handler: The closure run when the action button is tapped.
     public init(
         toastIcon: String? = nil,
         toastTitle: String,

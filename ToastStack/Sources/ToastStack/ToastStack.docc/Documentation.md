@@ -2,7 +2,7 @@
 
 Present lightweight, stackable messages in a SwiftUI app for iOS and macOS.
 
-ToastStack provides success, error, warning, and informational styles, along with a way to display custom SwiftUI content. Add a toast host to the view where messages should appear, then present a toast from an action.
+ToastStack provides success, error, warning, and informational styles, actionable toasts with a button, and a way to display custom SwiftUI content. Add a toast host to the view where messages should appear, then present a toast from an action.
 
 ## Topics
 
@@ -12,9 +12,11 @@ ToastStack provides success, error, warning, and informational styles, along wit
 - <doc:ToastHost>
 - <doc:PlacementAndAnimation>
 - <doc:BuiltInStyles>
+- <doc:ActionableToasts>
 - <doc:CustomContent>
 
 ### API reference
 
 - ``ToastStack``
+- ``ToastAction``
 - ``ToastStyle``

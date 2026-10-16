@@ -117,7 +117,17 @@ public enum ToastStack {
         )
     }
     
-    /// TODO: 
+    /// Presents a toast with a single action button.
+    ///
+    /// The action handler runs when the button is tapped. The button briefly shows a checkmark
+    /// after activation. If `action.dismissOnTrigger` is `true`, the toast is dismissed after
+    /// that feedback animation. Set it to `false` to keep the toast visible until its deadline.
+    ///
+    /// - Parameters:
+    ///   - message: The message shown below the action title.
+    ///   - alignment: The alignment that determines the toast's entrance edge.
+    ///   - action: The title, optional icons, button behavior, and handler for the action.
+    ///   - dismissalTimeDeadline: The number of seconds before the toast is removed automatically. Defaults to `60`.
     public static func actionable(
         _ message: String,
         _ alignment: Alignment,

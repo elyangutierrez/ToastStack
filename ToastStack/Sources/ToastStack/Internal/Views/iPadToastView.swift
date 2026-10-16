@@ -111,7 +111,7 @@ internal struct iPadToastView: View {
                     Image(systemName: "xmark")
                         .font(ToastConstants.IPAD_CLOSE_BUTTON_FONT.bold())
                         .foregroundStyle(toast.toastForegroundColor(for: colorScheme).opacity(0.7))
-                        .padding(10)
+                        .padding(8)
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(toast.toastForegroundColor(for: colorScheme).opacity(0.2))
@@ -137,7 +137,7 @@ internal struct iPadToastView: View {
     
     @ViewBuilder
     func textualButton(action: ToastAction) -> some View {
-        ZStack {
+        VStack {
             if isButtonPressed {
                 Image(systemName: "checkmark")
                     .font(ToastConstants.IPAD_TOAST_TITLE_FONT)

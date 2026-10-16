@@ -135,7 +135,7 @@ internal struct iPhoneToastView: View {
     
     @ViewBuilder
     func textualButton(action: ToastAction) -> some View {
-        ZStack {
+        VStack {
             if isButtonPressed {
                 Image(systemName: "checkmark")
                     .font(ToastConstants.IPHONE_CLOSE_BUTTON_FONT.bold())

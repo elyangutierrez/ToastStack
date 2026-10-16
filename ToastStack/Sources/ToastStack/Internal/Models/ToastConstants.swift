@@ -7,9 +7,6 @@
 
 import Foundation
 import SwiftUI
-#if os(iOS)
-import UIKit
-#endif
 
 internal typealias ShadowRadius = CGFloat
 internal typealias ShadowY = CGFloat

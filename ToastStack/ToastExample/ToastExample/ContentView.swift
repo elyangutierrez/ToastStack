@@ -20,7 +20,25 @@ struct ContentView: View {
 //                ToastStack.success(message: "Changes made.")
 //                ToastStack.info(message: "A new version is avaliable.")
 //                ToastStack.warning(message: "Check your connection.")
-                ToastStack.error(message: "Could not save changes.", dismissalTime: 1)
+//                ToastStack.error(message: "Could not save changes.", dismissalTime: 1)
+                
+                ToastStack.actionable(
+                    "This will undo the latest action.",
+                        .top,
+                    action: ToastAction(
+                        toastIcon: "arrow.trianglehead.counterclockwise.rotate.90",
+                        toastTitle: "Undo?",
+                        buttonTitle: "Undo",
+                        dismissOnTrigger: true,
+                        handler: {
+                            Task {
+                                print("Doing some work")
+                                try? await Task.sleep(for: .seconds(5))
+                                print("work is done")
+                            }
+                        }
+                    )
+                )
             }) {
                 Text("Show Toast")
             }

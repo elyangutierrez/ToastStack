@@ -20,14 +20,14 @@ internal struct ToastConstants {
     
     static let IPHONE_TOAST_ICON_FONT: Font = .largeTitle
     static let IPHONE_TOAST_TITLE_FONT: Font = .title3
-    static let IPHONE_CLOSE_BUTTON_FONT: Font = .title2
+    static let IPHONE_CLOSE_BUTTON_FONT: Font = .title3
     static let IPHONE_SHADOW_SPECS: (ShadowRadius, ShadowY) = (3.0, 5.0)
     
     static let IPAD_TOAST_ICON_FONT: Font = .system(size: 45)
     static let IPAD_TOAST_TITLE_FONT: Font = .title
     static let IPAD_TOAST_MESSAGE_FONT: Font = .title2
-    static let IPAD_CLOSE_BUTTON_FONT: Font = .title
-    static let IPAD_SHADOW_SPECS: (ShadowRadius, ShadowY) = (7.0, 7.0)
+    static let IPAD_CLOSE_BUTTON_FONT: Font = .title2
+    static let IPAD_SHADOW_SPECS: (ShadowRadius, ShadowY) = (5.0, 10.0)
     
     static let MAC_TOAST_ICON_FONT: Font = .title
     static let MAC_TOAST_TITLE_FONT: Font = .system(size: 14)
@@ -74,4 +74,15 @@ internal struct ToastConstants {
         light: Color(hex: 0xB20007),
         dark: Color(hex: 0xFFCCCE)
     )
+    
+    static let ACTIONABLE_BACKGROUND: ToastColor = ToastColor(
+        light: Color(hex: 0xEAEAED),
+        dark: Color(hex: 0x1B1B1D)
+    )
+    
+    static let ACTIONABLE_FOREGROUND: ToastColor = ToastColor(
+        light: Color(hex: 0x000000),
+        dark: Color(hex: 0xFFFFFF)
+    )
+    
 }

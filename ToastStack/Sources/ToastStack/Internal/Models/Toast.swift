@@ -11,9 +11,10 @@ import SwiftUI
 internal struct Toast: Identifiable, Equatable, Hashable {
     var id = UUID()
     var message: String
-    var style: ToastStyle
+    var style: ToastStyle?
     var alignment: Alignment
     var content: AnyView?
+    var action: ToastAction?
     
     init(
         message: String,
@@ -23,6 +24,16 @@ internal struct Toast: Identifiable, Equatable, Hashable {
         self.message = message
         self.style = style
         self.alignment = alignment
+    }
+    
+    init(
+        message: String,
+        alignment: Alignment,
+        action: ToastAction
+    ) {
+        self.message = message
+        self.alignment = alignment
+        self.action = action
     }
     
     init<Content: View>(
@@ -38,36 +49,48 @@ internal struct Toast: Identifiable, Equatable, Hashable {
     }
     
     var title: String {
-        style.rawValue
+        
+        guard let style else { return "N/A" }
+        
+        return style.rawValue
     }
     
     var icon: String {
+        
+        guard let style else { return "questionmark" }
+        
         switch style {
         case .success:
-            "checkmark.circle.fill"
+            return "checkmark.circle.fill"
         case .error:
-            "xmark.circle.fill"
+            return "xmark.circle.fill"
         case .info:
-            "info.circle.fill"
+            return "info.circle.fill"
         case .warning:
-            "exclamationmark.circle.fill"
+            return "exclamationmark.circle.fill"
         }
     }
     
     var iconColor: Color {
+        
+        guard let style else { return .gray }
+        
         switch style {
         case .success:
-            ToastConstants.SUCCESS_ICON
+            return ToastConstants.SUCCESS_ICON
         case .error:
-            ToastConstants.ERROR_ICON
+            return ToastConstants.ERROR_ICON
         case .info:
-            ToastConstants.INFO_ICON
+            return ToastConstants.INFO_ICON
         case .warning:
-            ToastConstants.WARNING_ICON
+            return ToastConstants.WARNING_ICON
         }
     }
     
     func toastBackgroundColor(for colorScheme: ColorScheme) -> Color {
+        
+        guard let style else { return .gray }
+        
         switch style {
         case .success:
             return colorScheme == .light ? ToastConstants.SUCCESS_BACKGROUND.light : ToastConstants.SUCCESS_BACKGROUND.dark
@@ -81,6 +104,9 @@ internal struct Toast: Identifiable, Equatable, Hashable {
     }
     
     func toastForegroundColor(for colorScheme: ColorScheme) -> Color {
+        
+        guard let style else { return .gray }
+        
         switch style {
         case .success:
             return colorScheme == .light ? ToastConstants.SUCCESS_FOREGROUND.light : ToastConstants.SUCCESS_FOREGROUND.dark

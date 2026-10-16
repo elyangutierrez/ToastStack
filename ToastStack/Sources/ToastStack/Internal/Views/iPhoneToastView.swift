@@ -8,7 +8,6 @@
 import SwiftUI
 
 internal struct iPhoneToastView: View {
-    @Namespace private var namespace
     @Environment(\.colorScheme) var colorScheme
     
     @State private var isButtonPressed: Bool = false
@@ -163,7 +162,7 @@ internal struct iPhoneToastView: View {
     }
 }
 
-#Preview("Regular") {
+#Preview("iPhone Regular") {
     let toast = Toast(message: "Your changes were successful.", style: .success, alignment: .top)
     
     iPhoneToastView(toast: toast, dismissAction: {})
@@ -172,7 +171,7 @@ internal struct iPhoneToastView: View {
         .padding()
 }
 
-#Preview("Actionable Toast") {
+#Preview("iPhone Actionable Toast") {
     let toast = Toast(
         message: "This will undo the latest action.",
         alignment: .top,

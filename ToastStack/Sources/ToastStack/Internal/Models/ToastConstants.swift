@@ -30,7 +30,7 @@ internal struct ToastConstants {
     static let IPAD_TOAST_TITLE_FONT: Font = .title
     static let IPAD_TOAST_MESSAGE_FONT: Font = .title2
     static let IPAD_CLOSE_BUTTON_FONT: Font = .title2
-    static let IPAD_SHADOW_SPECS: (ShadowRadius, ShadowY) = (7.0, 7.0)
+    static let IPAD_SHADOW_SPECS: (ShadowRadius, ShadowY) = (5.0, 10.0)
     
     static let MAC_TOAST_ICON_FONT: Font = .title
     static let MAC_TOAST_TITLE_FONT: Font = .system(size: 14)

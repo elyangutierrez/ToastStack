@@ -38,26 +38,26 @@ internal struct iPadToastView: View {
                 Spacer()
                 
                 Button(action: {
-                    
                     guard !isButtonPressed else { return }
                     
+                    buttonTask?.cancel()
+                    
                     buttonTask = Task {
+                        
                         withAnimation(.spring) {
                             isButtonPressed.toggle()
                         }
                         
-                        try? await Task.sleep(for: .seconds(4))
+                        try? await Task.sleep(for: .seconds(1))
                         try? Task.checkCancellation()
                         
                         withAnimation(.spring) {
                             isButtonPressed.toggle()
                         }
                         
-                        buttonTask?.cancel()
-                    }
-                    
-                    if action.dismissOnTrigger {
-                        dismissAction()
+                        if action.dismissOnTrigger {
+                            dismissAction()
+                        }
                     }
                     
                     action.handler()

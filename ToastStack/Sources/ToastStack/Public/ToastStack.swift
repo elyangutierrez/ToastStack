@@ -25,7 +25,7 @@ import SwiftUI
 /// // From an action:
 /// ToastStack.success(message: "Changes saved.")
 /// ```
-@MainActor
+
 public enum ToastStack {
     /// Presents a success toast.
     ///

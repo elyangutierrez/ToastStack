@@ -11,6 +11,7 @@ internal struct DemoView: View {
     
     var toastAppearanceAlignment: Alignment
     var randomButton: Bool
+    var actionableToast: Bool
     
     var body: some View {
         VStack(spacing: 8) {
@@ -25,6 +26,24 @@ internal struct DemoView: View {
                         "Something here...",
                         toastAppearanceAlignment,
                         AnyView(CustomDemoView())
+                    )
+                } else if actionableToast {
+                    ToastStack.actionable(
+                        "This will undo the latest action.",
+                            .top,
+                        action: ToastAction(
+                            toastIcon: "arrow.trianglehead.counterclockwise.rotate.90",
+                            toastTitle: "Undo?",
+                            buttonTitle: "Undo",
+                            dismissOnTrigger: true,
+                            handler: {
+                                Task {
+                                    print("Doing some work")
+                                    try? await Task.sleep(for: .seconds(5))
+                                    print("work is done")
+                                }
+                            }
+                        )
                     )
                 } else {
                     ToastStack.custom(
@@ -59,21 +78,28 @@ internal struct Demo: View {
 
 #Preview("Custom Placement") {
     Demo(toastAppearanceAlignment: .bottom) {
-        DemoView(toastAppearanceAlignment: .bottom, randomButton: false)
+        DemoView(toastAppearanceAlignment: .bottom, randomButton: false, actionableToast: false)
     }
     .toastHost(toastPlacement: .bottom)
 }
 
 #Preview("Default") {
     Demo() {
-        DemoView(toastAppearanceAlignment: .top, randomButton: true)
+        DemoView(toastAppearanceAlignment: .top, randomButton: true, actionableToast: false)
     }
     .toastHost()
 }
 
 #Preview("Custom Animation") {
     Demo() {
-        DemoView(toastAppearanceAlignment: .top, randomButton: true)
+        DemoView(toastAppearanceAlignment: .top, randomButton: false, actionableToast: false)
     }
     .toastHost(animationStyle: .interactiveSpring)
+}
+
+#Preview("Actionable Toast") {
+    Demo() {
+        DemoView(toastAppearanceAlignment: .top, randomButton: false, actionableToast: true)
+    }
+    .toastHost()
 }
